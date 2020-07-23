@@ -1,0 +1,13 @@
+{
+    "editor.tabSize": 2,
+    "cSpell.words": [
+        "SRID",
+        "dataloader",
+        "geotracker",
+        "postgres"
+    ],
+    "editor.minimap.maxColumn": 200,
+    "javascript.format.semicolons": "remove",
+    "eslint.run": "onSave",
+    "editor.formatOnSave": true
+}
