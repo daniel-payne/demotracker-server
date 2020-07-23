@@ -1,1 +1,1 @@
-# demotracker-server
+# Demo of GeoTracker Server
