@@ -1,3 +1,5 @@
+// https://jsfiddle.net/s6kvceyz/
+
 const packRowsIntoList = (rows, list, name) => {
   const map = {}
 
