@@ -16,6 +16,8 @@ The following videos explain how the project is built
 
 The partner frontend project can be found at
 
+https://github.com/daniel-payne/demotracker-client
+
 ## Available Scripts
 
 `node server`
