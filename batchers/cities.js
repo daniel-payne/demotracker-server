@@ -9,7 +9,7 @@ const cities = (parent, args, context, info) => {
 
   const fields = graphqlFields(info)
 
-  const loader = fields.eventCount ? context.loadCitiesWithEvents : context.loadCities
+  const loader = context.loadCities
 
   return loader.load(countryCode).then((data) => {
     if (data) {

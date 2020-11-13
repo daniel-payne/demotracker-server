@@ -1,6 +1,6 @@
 import runSQL from '../helpers/runSQL.js'
 
-const country = (parent, args, context, info) => {
+const counts = (parent, args, context, info) => {
   if (!context.session) {
     return
   }
@@ -9,15 +9,15 @@ const country = (parent, args, context, info) => {
 
   let SQL
 
-  const params = { ID }
-
-  if (info.fieldName === 'stateEvents') {
-    SQL = 'EVENTS_FOR_STATE'
+  if (info.fieldName === 'countryCounts') {
+    SQL = 'COUNTS_FOR_COUNTRY'
   } else if (info.fieldName === 'globalCounts') {
     SQL = 'COUNTS_FOR_GLOBE'
   }
 
+  const params = { ID }
+
   return runSQL(SQL, context.pool, params)
 }
 
-export default country
+export default counts

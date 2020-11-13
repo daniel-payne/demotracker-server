@@ -10,7 +10,7 @@ FROM
 INNER JOIN
   public.ne_110m_admin_0_countries CO ON ST_Contains(CO.geom, ST_SetSRID(ST_MakePoint(GT.longitude, GT.latitude), 4326))
 WHERE  
-  CO.fid = :id
+  CO.fid = :ID
 GROUP BY
   round(cast(GT.latitude  as numeric),         :ACCURACY ),
   round(cast(GT.longitude as numeric),         :ACCURACY );

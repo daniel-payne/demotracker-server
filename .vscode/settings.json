@@ -1,6 +1,13 @@
 {
     "editor.tabSize": 2,
     "cSpell.words": [
+        "PGDATABASE",
+        "PGHOST",
+        "PGPASSWORD",
+        "PGPORT",
+        "PGUSER",
+        "SESSIONPASSWORD",
+        "SESSIONUSER",
         "SRID",
         "dataloader",
         "geotracker",

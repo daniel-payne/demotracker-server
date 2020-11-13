@@ -1,4 +1,4 @@
-select 
+SELECT 
   T.ogc_fid                                     AS "id", 
   to_char(
     make_date(
@@ -28,7 +28,7 @@ FROM
 INNER JOIN
   public.ne_10m_admin_1_states_provinces S ON ST_Contains(S.geom, ST_SetSRID(ST_MakePoint(T.longitude, T.latitude), 4326))
 WHERE 
-  S.fid = :id
+  S.fid = :ID
 ORDER BY 
   iyear, imonth, iday
 OFFSET

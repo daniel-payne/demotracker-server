@@ -1,33 +1,28 @@
 import runSQL from '../helpers/runSQL.js'
 
 const markers = (parent, args, context, info) => {
-  const { id } = parent || {}
-  const { area } = args
+  if (!context.session) {
+    return
+  }
+
+  const { id: ID } = args
 
   let SQL
   let ACCURACY
 
-  switch (area) {
-    case 'HUNDRED_SQUARE_KILOMETERS':
-      ACCURACY = 0
-      break
-    case 'TEN_SQUARE_KILOMETERS':
-      ACCURACY = 1
-      break
-    case 'ONE_SQUARE_KILOMETER':
-      ACCURACY = 2
-      break
-    default:
-      ACCURACY = 0
-  }
+  //  'HUNDRED_SQUARE_KILOMETERS': ACCURACY = 0
+  //  'TEN_SQUARE_KILOMETERS':     ACCURACY = 1
+  //  'ONE_SQUARE_KILOMETER':      ACCURACY = 2
 
-  const params = { id, ACCURACY }
-
-  if (id) {
+  if (info.fieldName === 'countryMarkers') {
     SQL = 'MARKERS_FOR_COUNTRY'
-  } else {
-    SQL = 'MARKERS'
+    ACCURACY = 1
+  } else if (info.fieldName === 'globalMarkers') {
+    SQL = 'MARKERS_FOR_GLOBE'
+    ACCURACY = 0
   }
+
+  const params = { ID, ACCURACY }
 
   return runSQL(SQL, context.pool, params)
 }

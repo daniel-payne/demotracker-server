@@ -4,12 +4,39 @@ const { gql } = ApolloServer
 
 const typeDefs = gql`
   type Query {
+    viewer: Viewer @cacheControl(maxAge: 36000, scope: PRIVATE)
+    reference: Reference @cacheControl(maxAge: 36000, scope: PUBLIC)
+  }
+
+  type Mutation {
+    login(username: String, password: String): Viewer
+    logout: Viewer
+  }
+
+  type Viewer {
+    id: ID
+    role: String
+    session: String
+
+    globalMarkers: [Marker]
+    globalCounts: [Count]
+
+    countryMarkers(id: ID): [Marker]
+    countryCounts(id: ID): [Count]
+
+    stateEvents(id: ID): [Event]
+
+    cityEvents(id: ID): [Event]
+  }
+
+  type Reference {
     countries: [Country]
+
     country(id: ID): Country
+    state(id: ID): State
+    city(id: ID): City
 
     places(match: String!): [Place]
-
-    markers(area: AreaCoveredEnum): [Marker]
   }
 
   type Country {
@@ -21,13 +48,7 @@ const typeDefs = gql`
     states: [State]
     cities: [City]
 
-    state(id: ID): State
-    city(id: ID): City
-
     geoJson: String
-
-    eventCount: Int
-    markers(area: AreaCoveredEnum): [Marker]
   }
 
   type State {
@@ -35,22 +56,20 @@ const typeDefs = gql`
     name: String
     hascCode: String
 
+    countryId: ID
+    countryName: String
+
     geoJson: String
-
-    eventCount: Int
-
-    events: [Event]
   }
 
   type City {
     id: ID
     name: String
 
+    countryId: ID
+    countryName: String
+
     geoJson: String
-
-    eventCount: Int
-
-    events: [Event]
   }
 
   type Place {
@@ -58,14 +77,20 @@ const typeDefs = gql`
     name: String
     displayOrder: Float
     type: String
-    countryName: String
+
     countryId: ID
+    countryName: String
   }
 
   type Marker {
     id: ID
     latitude: Float
     longitude: Float
+    eventCount: Int
+  }
+
+  type Count {
+    id: ID
     eventCount: Int
   }
 
@@ -88,23 +113,6 @@ const typeDefs = gql`
     secondaryWeaponSubType: String
     tertiaryWeaponType: String
     tertiaryWeaponSubType: String
-  }
-
-  enum AreaCoveredEnum {
-    HUNDRED_SQUARE_KILOMETERS
-    TEN_SQUARE_KILOMETERS
-    ONE_SQUARE_KILOMETER
-  }
-
-  type Outline {
-    id: ID
-    name: String
-    iso2Code: String
-    iso3Code: String
-
-    geoJson: String
-
-    eventCount: Int
   }
 `
 

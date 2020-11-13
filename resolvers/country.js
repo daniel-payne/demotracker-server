@@ -7,19 +7,17 @@ const country = (parent, args, context, info) => {
 
   const fields = graphqlFields(info)
 
+  const showGeoJson = fields.geoJson
+
   let SQL
 
-  const params = { id }
-
-  if (fields.geoJson && fields.eventCount) {
-    SQL = 'COUNTRY_EVENTCOUNTS_GEOJSON'
-  } else if (fields.geoJson) {
-    SQL = 'COUNTRY_GEOJSON'
-  } else if (fields.eventCount) {
-    SQL = 'COUNTRY_EVENTCOUNTS'
+  if (showGeoJson) {
+    SQL = 'COUNTRY_WITH_GEOJSON'
   } else {
     SQL = 'COUNTRY'
   }
+
+  const params = { id }
 
   return runSQL(SQL, context.pool, params).then((rows) => rows[0])
 }

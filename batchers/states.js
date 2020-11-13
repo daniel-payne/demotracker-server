@@ -9,7 +9,7 @@ const states = (parent, args, context, info) => {
     return
   }
 
-  const loader = fields.eventCount ? context.loadStatesWithEvents : context.loadStates
+  const loader = context.loadStates
 
   return loader.load(countryCode).then((data) => {
     if (data) {
