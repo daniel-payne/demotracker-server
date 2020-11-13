@@ -11,7 +11,7 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
-    "apollo-server": "^2.13.1",
+    "apollo-server": "^2.14.2",
     "apollo-server-plugin-response-cache": "^0.5.0",
     "dataloader": "^2.0.0",
     "graphql": "^15.0.0",
