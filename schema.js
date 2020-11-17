@@ -33,8 +33,6 @@ const typeDefs = gql`
     countries: [Country]
 
     country(id: ID): Country
-    state(id: ID): State
-    city(id: ID): City
 
     places(match: String!): [Place]
   }
@@ -47,6 +45,9 @@ const typeDefs = gql`
 
     states: [State]
     cities: [City]
+
+    state(id: ID): State
+    city(id: ID): City
 
     geoJson: String
   }

@@ -56,14 +56,15 @@ const resolvers = {
     countries,
 
     country,
-    state,
-    city,
 
     places,
   },
   Country: {
     states,
     cities,
+
+    state,
+    city,
   },
   State: {},
   City: {},

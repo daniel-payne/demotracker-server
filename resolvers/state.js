@@ -11,12 +11,8 @@ const state = (parent, args, context, info) => {
 
   const params = { id }
 
-  if (fields.geoJson && fields.eventCount) {
-    SQL = 'STATE_EVENTCOUNTS_GEOJSON'
-  } else if (fields.geoJson) {
-    SQL = 'STATE_GEOJSON'
-  } else if (fields.eventCount) {
-    SQL = 'STATE_EVENTCOUNTS'
+  if (fields.geoJson) {
+    SQL = 'STATE_WITH_GEOJSON'
   } else {
     SQL = 'STATE'
   }
