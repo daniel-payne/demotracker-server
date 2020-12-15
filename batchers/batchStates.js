@@ -1,9 +1,5 @@
-import graphqlFields from 'graphql-fields'
-
 const batchStates = (parent, args, context, info) => {
   const ids = parent.id
-
-  const fields = graphqlFields(info)
 
   if (!ids) {
     return

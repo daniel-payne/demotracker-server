@@ -1,13 +1,9 @@
-import graphqlFields from 'graphql-fields'
-
 const batchCities = (parent, args, context, info) => {
   const countryCode = parent.id
 
   if (!countryCode) {
     return
   }
-
-  const fields = graphqlFields(info)
 
   const loader = context.loadCities
 

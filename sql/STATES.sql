@@ -11,6 +11,6 @@ SELECT
 FROM 
   info.states S
 WHERE 
-  S.country_id in ( :ids )  
+  S.country_id in ( :IDs )  
 AND
   S.state_name IS NOT NULL

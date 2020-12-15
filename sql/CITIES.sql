@@ -10,6 +10,6 @@ SELECT
 FROM 
   info.cities I
 WHERE 
-  I.country_id in ( :ids )  
+  I.country_id in ( :IDs )  
 AND
   I.city_name IS NOT NULL

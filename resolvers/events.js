@@ -13,8 +13,8 @@ const country = (parent, args, context, info) => {
 
   if (info.fieldName === 'stateEvents') {
     SQL = 'EVENTS_FOR_STATE'
-  } else if (info.fieldName === 'globalCounts') {
-    SQL = 'COUNTS_FOR_GLOBE'
+  } else if (info.fieldName === 'cityEvents') {
+    SQL = 'EVENTS_FOR_CITY'
   }
 
   return runSQL(SQL, context.pool, params)

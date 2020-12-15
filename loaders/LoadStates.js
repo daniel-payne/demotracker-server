@@ -5,7 +5,7 @@ import packRowsIntoList from '../helpers/packRowsIntoList.js'
 
 const LoadStates = (pool) => {
   const loadData = (ids) => {
-    const params = { ids }
+    const params = { IDs: ids }
 
     return runSQL('STATES', pool, params).then((rows) => {
       const countryDatum = packRowsIntoList(rows, ids, 'countryId')
