@@ -49,7 +49,8 @@ const typeDefs = gql`
     state(id: ID): State
     city(id: ID): City
 
-    geoJson: String
+    outline: String
+    center: String
   }
 
   type State {
@@ -60,7 +61,8 @@ const typeDefs = gql`
     countryId: ID
     countryName: String
 
-    geoJson: String
+    outline: String
+    center: String
   }
 
   type City {
@@ -70,7 +72,8 @@ const typeDefs = gql`
     countryId: ID
     countryName: String
 
-    geoJson: String
+    outline: String
+    center: String
   }
 
   type Place {

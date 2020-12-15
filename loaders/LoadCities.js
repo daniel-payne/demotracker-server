@@ -4,11 +4,11 @@ import runSQL from '../helpers/runSQL.js'
 import packRowsIntoList from '../helpers/packRowsIntoList.js'
 
 const LoadCities = (pool) => {
-  const loadData = (countryCodes) => {
-    const params = { countryCodes }
+  const loadData = (ids) => {
+    const params = { ids }
 
     return runSQL('CITIES', pool, params).then((rows) => {
-      const countryDatum = packRowsIntoList(rows, countryCodes, 'countryCode')
+      const countryDatum = packRowsIntoList(rows, ids, 'countryId')
 
       return countryDatum
     })

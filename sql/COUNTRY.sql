@@ -1,9 +1,14 @@
 SELECT
-  C.fid                        AS "id",
-  C.name                       AS "name",
-  C.iso_a2                     AS "iso2Code", 
-  C.iso_a3                     AS "iso3Code"
+  C.country_id                 AS "id",
+  C.country_name               AS "name",
+  
+  C.iso2_code                  AS "iso2Code",
+  C.iso3_code                  AS "iso3Code",
+  C.outline_json               AS "outline",
+  C.center_json                AS "center"
 FROM
-  public.ne_110m_admin_0_countries C
+  info.countries C
 WHERE 
-  C.fid = :id
+  C.country_id = :id
+
+    

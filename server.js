@@ -18,8 +18,8 @@ import country from './resolvers/country.js'
 import state from './resolvers/state.js'
 import city from './resolvers/city.js'
 
-import states from './batchers/states.js'
-import cities from './batchers/cities.js'
+import batchStates from './batchers/batchStates.js'
+import batchCities from './batchers/batchCities.js'
 
 import LoadStates from './loaders/LoadStates.js'
 import LoadCities from './loaders/LoadCities.js'
@@ -60,8 +60,8 @@ const resolvers = {
     places,
   },
   Country: {
-    states,
-    cities,
+    states: batchStates,
+    cities: batchCities,
 
     state,
     city,

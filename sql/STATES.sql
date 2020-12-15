@@ -1,12 +1,16 @@
 SELECT 
-  S.fid                                     AS "id",
-  S.iso_a2                                  AS "countryCode",
-  S.name                                    AS "name",
-  S.code_hasc                               AS "hascCode", 
-  ST_AsGeoJSON(ST_ForcePolygonCW(geom))     AS "geoJson" 
+  S.state_id                                AS "id",
+  S.state_name                              AS "name",
+  
+  S.country_id                              AS "countryId",
+  S.country_name                            AS "countryName",
+  
+  S.hasc_code                               AS "hascCode", 
+  S.outline_json                            AS "outline",
+  S.center_json                             AS "center" 
 FROM 
-  public.ne_10m_admin_1_states_provinces S
+  info.states S
 WHERE 
-  S.iso_a2 in ( :countryCodes ) 
+  S.country_id in ( :ids )  
 AND
-  name IS NOT NULL
+  S.state_name IS NOT NULL

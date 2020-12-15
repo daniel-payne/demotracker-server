@@ -1,7 +1,7 @@
 import graphqlFields from 'graphql-fields'
 
-const cities = (parent, args, context, info) => {
-  const countryCode = parent.iso2Code
+const batchCities = (parent, args, context, info) => {
+  const countryCode = parent.id
 
   if (!countryCode) {
     return
@@ -20,4 +20,4 @@ const cities = (parent, args, context, info) => {
   })
 }
 
-export default cities
+export default batchCities

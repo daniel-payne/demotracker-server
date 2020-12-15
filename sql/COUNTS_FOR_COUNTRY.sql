@@ -1,29 +1,28 @@
-SELECT 
-  id                                      AS "id",
-  count                                   AS "eventCount"
-FROM 
-  public.state_event_counts S  
+SELECT
+  country_id                            AS "countryId",
+  state_id                              AS "stateOrCityId",
+  count(*)                              AS "eventCount"
+FROM
+   info.events E
 WHERE 
-  S.country_iso_a2 = (
-    SELECT 
-      C.iso_a2
-    FROM
-      public.ne_110m_admin_0_countries C
-    WHERE 
-      C.fid = :ID
-)
-UNION
-SELECT 
-  id                                      AS "id",
-  count                                   AS "eventCount"
-FROM 
-  public.city_event_counts C
+  country_id = :id
+AND 
+  state_id IS NOT NULL 
+GROUP BY 
+  country_id,
+  state_id 
+
+UNION SELECT
+  country_id                            AS "countryId",
+  city_id                               AS "stateOrCityId",
+  count(*)                              AS "eventCount"
+FROM
+   info.events E
 WHERE 
-  C.country_iso_a2 = (
-    SELECT 
-      C.iso_a2
-    FROM
-      public.ne_110m_admin_0_countries C
-    WHERE 
-      C.fid = :ID
-)
+  country_id = :id
+AND 
+  city_id IS NOT NULL 
+GROUP BY 
+  country_id,
+  city_id 
+

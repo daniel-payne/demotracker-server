@@ -1,36 +1,32 @@
 SELECT 
-  T.ogc_fid                                     AS "id", 
-  to_char(
-    make_date(
-      iyear, 
-      imonth, 
-      CASE WHEN iday = 0 THEN 1 ELSE iday END
-    ), 
-  'YYYY-MM-DD')                                 AS "date",
-  T.latitude                                    AS "latitude",
-  T.longitude                                   AS "longitude",
-  T.summary                                     AS "summary", 
-  T.gname                                       AS "perpetrator", 
-  T.nkill                                       AS "numberKilled", 
-  T.nwound                                      AS "numberWounded", 
-  T.attacktype1_txt                             AS "attackType",
-  T.attacktype2_txt                             AS "attackSubType",
-  targtype1_txt                                 AS "targetType",
-  targsubtype1_txt                              AS "targetSubType",
-  weaptype1_txt                                 AS "primaryWeaponType",
-  weapsubtype1_txt                              AS "primaryWeaponSubType",
-  weaptype2_txt                                 AS "secondaryWeaponType",
-  weapsubtype2_txt                              AS "secondaryWeaponSubType",
-  weaptype3_txt                                 AS "tertiaryWeaponType",
-  weapsubtype3_txt                              AS "tertiaryWeaponSubType" 
+  event_id                      AS "id", 
+  event_date                    AS "date",
+  country_name                  AS "countryName",
+  state_name                    AS "stateName",
+  city_name                     AS "cityName",
+  country_id                    AS "countryId",
+  state_id                      AS "stateId",
+  city_id                       AS "cityId",
+  center_json                   AS "centerJson",
+  is_success                    AS "isSuccess",
+  number_killed                 AS "numberKilled",
+  number_wounded                AS "numberWounded",
+  attack_type                   AS "attackType",
+  attack_details                AS "attackDetails",
+  target_type                   AS "targetType",
+  target_details                AS "targetDetails",
+  target_nationality            AS "targetNationality",
+  perpetrator_name              AS "perpetratorName",
+  perpetrator_motive            AS "perpetratorMotive",
+  weapon_type                   AS "weaponType",
+  weapon_details                AS "weaponDetails",
+  additional_notes              AS "additionalNotes"
 FROM
-  public.global_terrorism_database_2018 T
-INNER JOIN
-  public.ne_10m_admin_1_states_provinces S ON ST_Contains(S.geom, ST_SetSRID(ST_MakePoint(T.longitude, T.latitude), 4326))
+  info.events E
 WHERE 
-  S.fid = :ID
+  E.state_id = :ID
 ORDER BY 
-  iyear, imonth, iday
+  E.event_date
 OFFSET
   0
 LIMIT 

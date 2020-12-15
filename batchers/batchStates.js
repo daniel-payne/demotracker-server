@@ -1,17 +1,17 @@
 import graphqlFields from 'graphql-fields'
 
-const states = (parent, args, context, info) => {
-  const countryCode = parent.iso2Code
+const batchStates = (parent, args, context, info) => {
+  const ids = parent.id
 
   const fields = graphqlFields(info)
 
-  if (!countryCode) {
+  if (!ids) {
     return
   }
 
   const loader = context.loadStates
 
-  return loader.load(countryCode).then((data) => {
+  return loader.load(ids).then((data) => {
     if (data) {
       data.sort((a, b) => (a.name > b.name ? 1 : -1))
     }
@@ -20,4 +20,4 @@ const states = (parent, args, context, info) => {
   })
 }
 
-export default states
+export default batchStates

@@ -1,10 +1,15 @@
-SELECT DISTINCT
-  conurbation_id                          AS "id",
-  iso_a2                                  AS "countryCode",
-  name                                    AS "name" 
+SELECT 
+  I.city_id                                 AS "id",
+  I.city_name                               AS "name",
+  
+  I.country_id                              AS "countryId",
+  I.country_name                            AS "countryName",
+  
+  I.outline_json                            AS "outline",
+  I.center_json                             AS "center" 
 FROM 
-  public.vm_conurbation 
+  info.cities I
 WHERE 
-  iso_a2 in ( :countryCodes )  
+  I.country_id in ( :ids )  
 AND
-  name IS NOT NULL
+  I.city_name IS NOT NULL
