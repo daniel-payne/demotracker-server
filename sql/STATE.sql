@@ -5,9 +5,9 @@ SELECT
   S.country_id                              AS "countryId",
   S.country_name                            AS "countryName",
   
-  S.code_hasc                               AS "hascCode", 
-  C.outline_json                            AS "outline",
-  C.center_json                             AS "center"
+  S.hasc_code                               AS "hascCode", 
+  S.outline_json                            AS "outline",
+  S.center_json                             AS "center"
 FROM 
   info.states S
 WHERE 

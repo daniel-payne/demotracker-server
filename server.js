@@ -51,6 +51,7 @@ const resolvers = {
     countryCounts: counts,
 
     stateEvents: events,
+    cityEvents: events,
   },
   Reference: {
     countries,

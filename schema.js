@@ -25,7 +25,6 @@ const typeDefs = gql`
     countryCounts(id: ID): [Count]
 
     stateEvents(id: ID): [Event]
-
     cityEvents(id: ID): [Event]
   }
 
@@ -103,20 +102,26 @@ const typeDefs = gql`
     date: String
     latitude: Float
     longitude: Float
-    summary: String
-    perpetrator: String
+    countryName: String
+    stateName: String
+    cityName: String
+    countryId: Int
+    stateId: Int
+    cityId: Int
+    centerJson: String
+    isSuccess: String
     numberKilled: Int
     numberWounded: Int
     attackType: String
-    attackSubType: String
+    attackDetails: String
     targetType: String
-    targetSubType: String
-    primaryWeaponType: String
-    primaryWeaponSubType: String
-    secondaryWeaponType: String
-    secondaryWeaponSubType: String
-    tertiaryWeaponType: String
-    tertiaryWeaponSubType: String
+    targetDetails: String
+    targetNationality: String
+    perpetratorName: String
+    perpetratorMotive: String
+    weaponType: String
+    weaponDetails: String
+    additionalNotes: String
   }
 `
 

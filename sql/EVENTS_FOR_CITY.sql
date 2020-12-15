@@ -1,6 +1,8 @@
 SELECT 
   event_id                      AS "id", 
   event_date                    AS "date",
+  latitude                      AS "latitude",
+  longitude                     AS "longitude",
   country_name                  AS "countryName",
   state_name                    AS "stateName",
   city_name                     AS "cityName",

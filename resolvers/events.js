@@ -1,5 +1,10 @@
 import runSQL from '../helpers/runSQL.js'
 
+const sqlFor = {
+  stateEvents: 'EVENTS_FOR_STATE',
+  cityEvents: 'EVENTS_FOR_CITY',
+}
+
 const country = (parent, args, context, info) => {
   if (!context.session) {
     return
@@ -7,17 +12,11 @@ const country = (parent, args, context, info) => {
 
   const { id: ID } = args
 
-  let SQL
+  const sql = sqlFor[info.fieldName]
 
   const params = { ID }
 
-  if (info.fieldName === 'stateEvents') {
-    SQL = 'EVENTS_FOR_STATE'
-  } else if (info.fieldName === 'cityEvents') {
-    SQL = 'EVENTS_FOR_CITY'
-  }
-
-  return runSQL(SQL, context.pool, params)
+  return runSQL(sql, context.pool, params)
 }
 
 export default country
