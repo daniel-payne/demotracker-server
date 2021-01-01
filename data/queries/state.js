@@ -1,4 +1,4 @@
-import runSQL from '../helpers/runSQL.js'
+import runSQL from '../connection/runSQL.js'
 
 const state = (parent, args, context, info) => {
   const { id } = args

@@ -1,4 +1,4 @@
-import runSQL from '../helpers/runSQL.js'
+import runSQL from '../connection/runSQL.js'
 
 const places = (parent, args, context, info) => {
   const { match } = args

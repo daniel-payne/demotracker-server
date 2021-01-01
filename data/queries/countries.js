@@ -1,4 +1,4 @@
-import runSQL from '../helpers/runSQL.js'
+import runSQL from '../connection/runSQL.js'
 
 const countries = (parent, args, context, info) => {
   return runSQL('COUNTRIES', context.pool)

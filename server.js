@@ -3,36 +3,17 @@ import 'apollo-cache-control'
 import responseCachePlugin from 'apollo-server-plugin-response-cache'
 import pg from 'pg'
 
-import schema from './schema.js'
+import schema from './schema/index.js'
 
-import viewer from './resolvers/viewer.js'
-import reference from './resolvers/reference.js'
-import information from './resolvers/information.js'
+import resolvers from './data/resolvers.js'
 
-import overlays from './resolvers/overlays.js'
+import LoadStates from './data/loaders/LoadStates.js'
+import LoadCities from './data/loaders/LoadCities.js'
 
-import markers from './resolvers/markers.js'
-import events from './resolvers/events.js'
-import counts from './resolvers/counts.js'
-
-import countries from './resolvers/countries.js'
-import places from './resolvers/places.js'
-import country from './resolvers/country.js'
-import state from './resolvers/state.js'
-import city from './resolvers/city.js'
-
-import batchStates from './batchers/batchStates.js'
-import batchCities from './batchers/batchCities.js'
-
-import LoadStates from './loaders/LoadStates.js'
-import LoadCities from './loaders/LoadCities.js'
-
-import login from './mutations/login.js'
-import logout from './mutations/logout.js'
+import getCookiesMap from './helpers/getCookiesMap.js'
 
 const ONE_MONTH = 1 * 30 * 24 * 60 * 60
 
-// 127.0.0.1 5432 3306 geotracker
 const pool = new pg.Pool({
   // user:     process.env.PGUSER,
   // host:     process.env.PGHOST,
@@ -41,61 +22,8 @@ const pool = new pg.Pool({
   // password: process.env.PGPASSWORD,
 })
 
-const resolvers = {
-  Query: {
-    viewer,
-    information,
-    reference,
-  },
-  Viewer: {
-    globalMarkers: markers,
-    globalCounts: counts,
-
-    countryMarkers: markers,
-    countryCounts: counts,
-
-    stateEvents: events,
-    cityEvents: events,
-  },
-  Information: {
-    countries,
-
-    country,
-
-    places,
-  },
-  Reference: {
-    overlays,
-  },
-  Country: {
-    states: batchStates,
-    cities: batchCities,
-
-    state,
-    city,
-  },
-  State: {},
-  City: {},
-  Mutation: {
-    login,
-    logout,
-  },
-}
-
 const loadCities = LoadCities(pool)
 const loadStates = LoadStates(pool)
-
-function getCookiesMap(cookiesString) {
-  return cookiesString
-    .split(';')
-    .map(function (cookieString) {
-      return cookieString.trim().split('=')
-    })
-    .reduce(function (result, current) {
-      result[current[0]] = current[1]
-      return result
-    }, {})
-}
 
 const server = new apolloServer.ApolloServer({
   typeDefs: schema,

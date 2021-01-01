@@ -1,8 +1,8 @@
 const LOG_NAME = true
 const LOG_SQL = false
 
-import loadSQL from '../helpers/loadSQL.js'
-import replaceParameters from '../helpers/replaceParameters.js'
+import loadSQL from './loadSQL.js'
+import replaceParameters from './replaceParameters.js'
 
 const runSQL = (name, pool, params = {}) => {
   let sql = loadSQL(name)

@@ -1,7 +1,7 @@
 import DataLoader from 'dataloader'
 
-import runSQL from '../helpers/runSQL.js'
-import packRowsIntoList from '../helpers/packRowsIntoList.js'
+import runSQL from '../connection/runSQL.js'
+import packRowsIntoList from '../connection/packRowsIntoList.js'
 
 const LoadCities = (pool) => {
   const loadData = (ids) => {

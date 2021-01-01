@@ -1,4 +1,4 @@
-import runSQL from '../helpers/runSQL.js'
+import runSQL from '../connection/runSQL.js'
 
 const HUNDRED_SQUARE_KILOMETERS = 0
 const TEN_SQUARE_KILOMETERS = 1
