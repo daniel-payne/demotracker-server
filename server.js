@@ -3,8 +3,7 @@ import 'apollo-cache-control'
 import responseCachePlugin from 'apollo-server-plugin-response-cache'
 import pg from 'pg'
 
-import schema from './schema/index.js'
-
+import typeDefs from './schema/typeDefs.js'
 import resolvers from './data/resolvers.js'
 
 import LoadStates from './data/loaders/LoadStates.js'
@@ -26,7 +25,7 @@ const loadCities = LoadCities(pool)
 const loadStates = LoadStates(pool)
 
 const server = new apolloServer.ApolloServer({
-  typeDefs: schema,
+  typeDefs,
   resolvers,
 
   cors: {
