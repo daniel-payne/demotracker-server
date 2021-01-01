@@ -7,6 +7,9 @@ import schema from './schema.js'
 
 import viewer from './resolvers/viewer.js'
 import reference from './resolvers/reference.js'
+import globe from './resolvers/globe.js'
+
+import overlays from './resolvers/overlays.js'
 
 import markers from './resolvers/markers.js'
 import events from './resolvers/events.js'
@@ -41,6 +44,7 @@ const pool = new pg.Pool({
 const resolvers = {
   Query: {
     viewer,
+    globe,
     reference,
   },
   Viewer: {
@@ -53,12 +57,15 @@ const resolvers = {
     stateEvents: events,
     cityEvents: events,
   },
-  Reference: {
+  Globe: {
     countries,
 
     country,
 
     places,
+  },
+  Reference: {
+    overlays,
   },
   Country: {
     states: batchStates,

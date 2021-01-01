@@ -5,6 +5,7 @@ const { gql } = ApolloServer
 const typeDefs = gql`
   type Query {
     viewer: Viewer @cacheControl(maxAge: 36000, scope: PRIVATE)
+    globe: Globe @cacheControl(maxAge: 36000, scope: PUBLIC)
     reference: Reference @cacheControl(maxAge: 36000, scope: PUBLIC)
   }
 
@@ -28,12 +29,33 @@ const typeDefs = gql`
     cityEvents(id: ID): [Event]
   }
 
-  type Reference {
+  type Globe {
     countries: [Country]
 
     country(id: ID): Country
 
     places(match: String!): [Place]
+  }
+
+  type Reference {
+    overlays: [Overlay]
+  }
+
+  type Overlay {
+    id: ID
+    name: String
+    options: [Option]
+  }
+
+  type Option {
+    id: ID
+    name: String
+    ranges: [Range]
+  }
+
+  type Range {
+    id: ID
+    name: String
   }
 
   type Country {
