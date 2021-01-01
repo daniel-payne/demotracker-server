@@ -5,7 +5,7 @@ const { gql } = ApolloServer
 const typeDefs = gql`
   type Query {
     viewer: Viewer @cacheControl(maxAge: 36000, scope: PRIVATE)
-    globe: Globe @cacheControl(maxAge: 36000, scope: PUBLIC)
+    information: Information @cacheControl(maxAge: 36000, scope: PUBLIC)
     reference: Reference @cacheControl(maxAge: 36000, scope: PUBLIC)
   }
 
@@ -29,7 +29,7 @@ const typeDefs = gql`
     cityEvents(id: ID): [Event]
   }
 
-  type Globe {
+  type Information {
     countries: [Country]
 
     country(id: ID): Country
