@@ -1,3 +1,5 @@
+import dotenv from 'dotenv'
+
 import apolloServer from 'apollo-server'
 import 'apollo-cache-control'
 import responseCachePlugin from 'apollo-server-plugin-response-cache'
@@ -10,6 +12,10 @@ import LoadStates from './data/loaders/LoadStates.js'
 import LoadCities from './data/loaders/LoadCities.js'
 
 import getCookiesMap from './helpers/getCookiesMap.js'
+
+dotenv.config()
+
+console.log(process.env.PGUSER)
 
 const ONE_MONTH = 1 * 30 * 24 * 60 * 60
 
