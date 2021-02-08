@@ -15,7 +15,7 @@ import getCookiesMap from './helpers/getCookiesMap.js'
 
 dotenv.config()
 
-console.log(process.env.PGUSER)
+console.log(process.env.PGHOST, process.env.PGPORT)
 
 const ONE_MONTH = 1 * 30 * 24 * 60 * 60
 
@@ -35,7 +35,7 @@ const server = new apolloServer.ApolloServer({
   resolvers,
 
   cors: {
-    origin: '*',
+    origin: true,
     credentials: true,
   },
 
