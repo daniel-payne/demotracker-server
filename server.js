@@ -47,6 +47,8 @@ const server = new apolloServer.ApolloServer({
 
     const setCookie = request.res.cookie.bind(request.res)
 
+    setCookie.sameSite = 'none'
+
     return {
       session,
       setCookie,
