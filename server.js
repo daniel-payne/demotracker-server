@@ -104,6 +104,6 @@ if (useHTTPS) {
   server = http.createServer(app)
 }
 
-server.listen({ port: 4000 }, (url) =>
+server.listen({ port: 4000, path: '/' }, (url) =>
   console.log(`${useHTTPS ? 'HTTPS Server' : 'Server'} running at ${4000}`)
 )
