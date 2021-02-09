@@ -37,6 +37,7 @@ const server = new apolloServer.ApolloServer({
   cors: {
     origin: true,
     credentials: true,
+    optionsSuccessStatus: 200,
   },
 
   context: (request) => {
