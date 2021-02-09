@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import express from 'express'
 import pkg from 'apollo-server-express'
 const { ApolloServer } = pkg
+import cors from 'cors'
 
 import fs from 'fs'
 import https from 'https'
@@ -32,6 +33,8 @@ process.argv.forEach(function (val) {
   }
 })
 
+const corsOptions = { origin: true, credentials: true, optionsSuccessStatus: 200 }
+
 const ONE_MONTH = 1 * 30 * 24 * 60 * 60
 
 const pool = new pg.Pool({
@@ -49,11 +52,7 @@ const apollo = new ApolloServer({
   typeDefs,
   resolvers,
 
-  cors: {
-    origin: true,
-    credentials: true,
-    optionsSuccessStatus: 200,
-  },
+  cors: corsOptions,
 
   context: (request) => {
     const cookieMap = request.req.headers.cookie ? getCookiesMap(request.req.headers.cookie) : {}
@@ -88,6 +87,8 @@ const apollo = new ApolloServer({
 
 const app = express()
 apollo.applyMiddleware({ app })
+
+app.use(cors(corsOptions))
 
 let server
 
