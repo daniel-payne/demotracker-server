@@ -11,7 +11,8 @@
         "SRID",
         "dataloader",
         "geotracker",
-        "postgres"
+        "postgres",
+        "selfsigned"
     ],
     "editor.minimap.maxColumn": 200,
     "javascript.format.semicolons": "remove",
