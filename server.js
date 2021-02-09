@@ -1,6 +1,13 @@
 import dotenv from 'dotenv'
 
-import apolloServer from 'apollo-server'
+import express from 'express'
+import pkg from 'apollo-server-express'
+const { ApolloServer } = pkg
+
+import fs from 'fs'
+import https from 'https'
+import http from 'http'
+
 import 'apollo-cache-control'
 import responseCachePlugin from 'apollo-server-plugin-response-cache'
 import pg from 'pg'
@@ -15,7 +22,15 @@ import getCookiesMap from './helpers/getCookiesMap.js'
 
 dotenv.config()
 
-console.log(process.env.PGHOST, process.env.PGPORT)
+console.log(process.env.PGUSER, process.env.PGHOST, process.env.PGPORT)
+
+let useHTTPS = false
+
+process.argv.forEach(function (val) {
+  if (val === '--https') {
+    useHTTPS = true
+  }
+})
 
 const ONE_MONTH = 1 * 30 * 24 * 60 * 60
 
@@ -30,7 +45,7 @@ const pool = new pg.Pool({
 const loadCities = LoadCities(pool)
 const loadStates = LoadStates(pool)
 
-const server = new apolloServer.ApolloServer({
+const apollo = new ApolloServer({
   typeDefs,
   resolvers,
 
@@ -71,6 +86,23 @@ const server = new apolloServer.ApolloServer({
   },
 })
 
-server.listen().then(({ url }) => {
-  console.info(`Server running at ${url}`)
-})
+const app = express()
+apollo.applyMiddleware({ app })
+
+let server
+
+if (useHTTPS) {
+  server = https.createServer(
+    {
+      key: fs.readFileSync(`./selfsigned.key`),
+      cert: fs.readFileSync(`./selfsigned.crt`),
+    },
+    app
+  )
+} else {
+  server = http.createServer(app)
+}
+
+server.listen({ port: 4000 }, (url) =>
+  console.log(`${useHTTPS ? 'HTTPS Server' : 'Server'} running at ${4000}`)
+)
