@@ -89,7 +89,7 @@ const apollo = new ApolloServer({
 
 let server
 
-apollo.applyMiddleware({ app, path: '/', cors: corsOptions })
+apollo.applyMiddleware({ app, cors: corsOptions })
 
 // app.use(cors(corsOptions))
 // app.options('*', cors(corsOptions))
