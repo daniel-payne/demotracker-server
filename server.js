@@ -48,6 +48,8 @@ const pool = new pg.Pool({
 const loadCities = LoadCities(pool)
 const loadStates = LoadStates(pool)
 
+const app = express()
+
 const apollo = new ApolloServer({
   typeDefs,
   resolvers,
@@ -85,13 +87,12 @@ const apollo = new ApolloServer({
   },
 })
 
-const app = express()
-apollo.applyMiddleware({ app })
-
-app.use(cors(corsOptions))
-app.options('*', cors(corsOptions))
-
 let server
+
+apollo.applyMiddleware({ app, path: '/', cors: corsOptions })
+
+// app.use(cors(corsOptions))
+// app.options('*', cors(corsOptions))
 
 if (useHTTPS) {
   server = https.createServer(
