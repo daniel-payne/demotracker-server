@@ -52,7 +52,7 @@ const apollo = new ApolloServer({
   typeDefs,
   resolvers,
 
-  cors: corsOptions,
+  // cors: corsOptions,
 
   context: (request) => {
     const cookieMap = request.req.headers.cookie ? getCookiesMap(request.req.headers.cookie) : {}
@@ -89,6 +89,7 @@ const app = express()
 apollo.applyMiddleware({ app })
 
 app.use(cors(corsOptions))
+app.options('*', cors(corsOptions))
 
 let server
 
